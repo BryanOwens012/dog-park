@@ -201,6 +201,13 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Aider
+#  Aider is an AI pair programming tool. Ignore aider configuration and cache files.
+.aider.*
+
+# Hidden markdown files
+.*.md
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
