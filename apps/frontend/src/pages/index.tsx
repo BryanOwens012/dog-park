@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Perplexity Clone</title>
+        <title>Simplexity Clone</title>
         <meta name="description" content="AI-powered search and discovery" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -36,7 +36,7 @@ export default function Home() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
             }}>
-              Perplexity
+              Simplexity
             </h1>
             <nav style={{ display: 'flex', gap: '1.5rem' }}>
               <a href="#" style={{ color: '#888', textDecoration: 'none', fontSize: '0.9rem' }}>Discover</a>
