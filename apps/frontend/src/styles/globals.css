@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles to match Google's design */
+body {
+  font-family: arial, sans-serif;
+}
