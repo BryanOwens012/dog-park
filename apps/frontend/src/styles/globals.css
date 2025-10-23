@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  .chat-input {
+    @apply bg-gray-800 rounded-2xl border border-gray-700 focus-within:border-gray-600 transition-colors;
+  }
+  
+  .chat-button {
+    @apply p-2 text-gray-400 hover:text-white transition-colors;
+  }
+  
+  .chat-send-button {
+    @apply p-2 bg-white text-gray-900 rounded-lg hover:bg-gray-100 transition-colors;
+  }
+}
