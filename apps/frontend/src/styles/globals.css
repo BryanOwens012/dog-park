@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide scrollbar for textarea */
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom focus styles */
+.focus-within\:border-gray-600:focus-within {
+  border-color: rgb(75 85 99);
+}
