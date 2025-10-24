@@ -1,19 +1,25 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import Head from 'next/head'
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('')
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = useCallback((e: React.FormEvent) => {
     e.preventDefault()
+    if (!searchQuery.trim()) return
     // Search functionality would go here
     console.log('Searching for:', searchQuery)
-  }
+  }, [searchQuery])
 
-  const handleLuckySearch = () => {
+  const handleLuckySearch = useCallback(() => {
+    if (!searchQuery.trim()) return
     // "I'm Feeling Lucky" functionality would go here
     console.log('Feeling lucky with:', searchQuery)
-  }
+  }, [searchQuery])
+
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value)
+  }, [])
 
   return (
     <>
@@ -65,19 +71,29 @@ export default function Home() {
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleInputChange}
                 className="w-full pl-12 pr-16 py-4 bg-gray-800 border border-gray-600 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
-                placeholder=""
+                placeholder="Search the web"
+                aria-label="Search"
+                autoComplete="off"
               />
               <div className="absolute inset-y-0 right-0 flex items-center space-x-3 pr-4">
-                <button type="button" className="p-2 hover:bg-gray-700 rounded">
+                <button 
+                  type="button" 
+                  className="p-2 hover:bg-gray-700 rounded transition-colors"
+                  aria-label="Search by voice"
+                >
                   <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1L13.5 2.5L16.17 5.17C15.24 5.06 14.32 5 13.38 5C10.38 5 7.7 6.11 5.73 7.89L7.1 9.26C8.46 8.05 10.33 7.38 12.38 7.38C13.32 7.38 14.24 7.44 15.17 7.56L12.5 10.23L14 11.73L21 9ZM12 15C10.33 15 8.7 14.62 7.26 13.96L5.89 15.33C7.7 16.11 9.8 16.5 12 16.5C14.2 16.5 16.3 16.11 18.11 15.33L16.74 13.96C15.3 14.62 13.67 15 12 15Z"/>
+                    <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
                   </svg>
                 </button>
-                <button type="button" className="p-2 hover:bg-gray-700 rounded">
+                <button 
+                  type="button" 
+                  className="p-2 hover:bg-gray-700 rounded transition-colors"
+                  aria-label="Search by image"
+                >
                   <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 2C6.24 2 4 4.24 4 7S6.24 12 9 12 14 9.76 14 7 11.76 2 9 2ZM9 10C7.34 10 6 8.66 6 7S7.34 4 9 4 12 5.34 12 7 10.66 10 9 10ZM9 13C6.33 13 1 14.34 1 17V20H17V17C17 14.34 11.67 13 9 13ZM3 18V17C3 16.36 6.67 15 9 15S15 16.36 15 17V18H3ZM16.76 5.36L18.18 6.78C19.15 5.81 20.61 5.81 21.58 6.78L23 8.2L21.58 9.62C20.61 10.59 19.15 10.59 18.18 9.62L16.76 8.2C15.79 7.23 15.79 5.77 16.76 4.8L18.18 3.38L19.6 4.8C20.57 5.77 20.57 7.23 19.6 8.2L18.18 6.78Z"/>
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
                   </svg>
                 </button>
               </div>
@@ -88,14 +104,16 @@ export default function Home() {
           <div className="flex space-x-4 mb-8">
             <button
               type="submit"
-              onClick={handleSearch}
-              className="bg-gray-800 hover:bg-gray-700 border border-gray-600 px-6 py-3 rounded text-sm text-gray-300 hover:text-white transition-colors"
+              className="bg-gray-800 hover:bg-gray-700 border border-gray-600 px-6 py-3 rounded text-sm text-gray-300 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!searchQuery.trim()}
             >
               Hoogle Search
             </button>
             <button
+              type="button"
               onClick={handleLuckySearch}
-              className="bg-gray-800 hover:bg-gray-700 border border-gray-600 px-6 py-3 rounded text-sm text-gray-300 hover:text-white transition-colors"
+              className="bg-gray-800 hover:bg-gray-700 border border-gray-600 px-6 py-3 rounded text-sm text-gray-300 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!searchQuery.trim()}
             >
               I'm Feeling Lucky
             </button>
