@@ -92,7 +92,12 @@ export default function Home() {
           {/* Buttons */}
           <div className="flex space-x-4 mb-8">
             <button
-              type="submit"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+                if (!searchQuery.trim()) return
+                console.log('Searching for:', searchQuery.trim())
+              }}
               className="bg-gray-800 hover:bg-gray-700 border border-gray-600 px-6 py-3 rounded text-sm text-gray-300 hover:text-white transition-colors"
             >
               Hoogle Search
