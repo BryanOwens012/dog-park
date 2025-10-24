@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles to match Google's design */
+body {
+  font-family: arial, sans-serif;
+}
+
+/* Custom button hover effects */
+.search-button {
+  transition: all 0.1s ease-in-out;
+}
+
+.search-button:hover {
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
